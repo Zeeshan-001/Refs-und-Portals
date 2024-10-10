@@ -9,21 +9,25 @@ const TimerChallange = ({ title, targetTime }) => {
 
   const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime * 1000;
 
+  // Clear Interval when target Time is Zero
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
     dialog.current.open();
   }
 
+  // After Close Modal Time Would restart
   const handleReset = () => {
     setTimeRemaining(targetTime * 1000);
   };
 
+  // Create Interval which run every 10 ms
   const handleStart = () => {
     timer.current = setInterval(() => {
       setTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 10);
     }, 10);
   };
 
+  // Stop Interval and Open Modal
   const handleStop = () => {
     clearInterval(timer.current);
     dialog.current.open();

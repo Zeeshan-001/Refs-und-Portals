@@ -3,8 +3,14 @@ import { createPortal } from "react-dom";
 
 const ResultModel = forwardRef(({ targetTime, remTime, onReset }, ref) => {
   const dialog = useRef();
+
+  // Variable Check if User lost or not
   const userLost = remTime <= 0;
+
+  // Time Formatted
   const formattedRemTime = (remTime / 1000).toFixed(2);
+
+  // Score Remaining
   const score = Math.round((1 - remTime / (targetTime * 1000)) * 100);
 
   useImperativeHandle(ref, () => {
@@ -22,7 +28,7 @@ const ResultModel = forwardRef(({ targetTime, remTime, onReset }, ref) => {
         This target time was <strong>{targetTime}</strong> seconds.
       </p>
       <p>
-        You Stopped the Timer with{" "}
+        You Stopped the Timer with
         <strong> {formattedRemTime} seconds left.</strong>
       </p>
       <form method="dialog" onSubmit={onReset}>
